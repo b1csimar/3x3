@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3x3</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grid div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.5em;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="grid" id="numberGrid">
+        
+    </div>
+    <button onclick="shuffleNumbers()">Keverés</button>
+</div>
+
+<script>
+    
+    const originalNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    
+    function initializeGrid() {
+        const grid = document.getElementById('numberGrid');
+        grid.innerHTML = ''; // Tisztítjuk a gridet
+        originalNumbers.forEach(number => {
+            const cell = document.createElement('div');
+            cell.textContent = number;
+            grid.appendChild(cell);
+        });
+    }
+
+    
+    function shuffleNumbers() {
+        const shuffledNumbers = [...originalNumbers];
+        for (let i = shuffledNumbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledNumbers[i], shuffledNumbers[j]] = [shuffledNumbers[j], shuffledNumbers[i]];
+        }
+
+        
+        const grid = document.getElementById('numberGrid');
+        grid.innerHTML = ''; // Tisztítjuk a gridet
+        shuffledNumbers.forEach(number => {
+            const cell = document.createElement('div');
+            cell.textContent = number;
+            grid.appendChild(cell);
+        });
+    }
+
+    
+    window.onload = initializeGrid;
+</script>
+
+</body>
+</html>
